@@ -40,7 +40,7 @@ padding: 0;
 border-top: none;
 max-height: 200px;
 overflow-y: auto;
-/* display: none; */
+display: none; 
  position: absolute; 
  width: 100%;
 

@@ -8,11 +8,13 @@ export default class Select{
  element.style.display='none'
   setUpEle(this)
   element.after(this.custom)
+  
 }
 get selectedEL(){
   return  this.optionsValue.find(obj=> obj.selected).label
 }
 }
+
 function setUpEle(select){
   select.custom.classList.add('custom-select-container')
 
@@ -20,10 +22,13 @@ function setUpEle(select){
   select.custom.append(select.label)
   select.label.textContent=select.selectedEL
   select.label.tabIndex=0
-  
+  select.label.addEventListener('click',   ()=>{
+    select.optionsbox.classList.toggle('show')
+  }
+)
+
   select.optionsbox.classList.add('custom-select-optionsbox')
   select.custom.append(select.optionsbox)
-
 
  select.optionsValue.forEach(el => {
  const cosOption=document.createElement('li')
