@@ -1,0 +1,60 @@
+.custom-select-container,
+.custom-select-label,
+.custom-select-optionsbox,
+.custom-select-option{
+  box-sizing: border-box;
+}
+body{
+  padding: 0;
+  margin: 0 ;
+ 
+}
+.custom-select-label::after{
+
+content: "\f078"; 
+font-family: "Font Awesome 5 Free"; 
+font-weight: 900; 
+} 
+.custom-select-container
+{
+ /*  border: 2px solid purple; */
+  width: 200px;
+  display: inline-block;
+position: relative;
+}
+.custom-select-label{
+  display: flex;
+  border: 2px solid black;
+  justify-content: space-between;
+  padding: 0.3rem;
+  font-weight: bold;
+  user-select: none;
+}
+.custom-select-label:focus{
+  outline:auto;
+}
+.custom-select-optionsbox{
+/*   border: 2px solid red; */
+margin: 0;
+padding: 0; 
+border-top: none;
+max-height: 200px;
+overflow-y: auto;
+/* display: none; */
+ position: absolute; 
+ width: 100%;
+
+}
+.custom-select-optionsbox.show{
+display: block;
+}
+.custom-select-option{
+  list-style: none;
+  padding: 0 5px;
+}
+.custom-select-option:hover{
+  background-color:hsl(0, 0%, 80%);
+  } 
+.custom-select-option.selected{
+  background-color:hsl(0, 0%, 60%);
+}

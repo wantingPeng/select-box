@@ -5,12 +5,12 @@ export default class Select{
   this.label=document.createElement('span')
   this.optionsbox=document.createElement('ul')
   this.optionsValue=getFormattedOptions(document.querySelectorAll('option'))
- 
+ element.style.display='none'
   setUpEle(this)
   element.after(this.custom)
 }
 get selectedEL(){
-  return  this.optionsValue.find(el=> el.selected)
+  return  this.optionsValue.find(obj=> obj.selected).label
 }
 }
 function setUpEle(select){
@@ -18,10 +18,12 @@ function setUpEle(select){
 
   select.label.classList.add('custom-select-label')
   select.custom.append(select.label)
-  select.label.textContent=select.selectedEL.label
-
+  select.label.textContent=select.selectedEL
+  select.label.tabIndex=0
+  
   select.optionsbox.classList.add('custom-select-optionsbox')
   select.custom.append(select.optionsbox)
+
 
  select.optionsValue.forEach(el => {
  const cosOption=document.createElement('li')
