@@ -22,22 +22,25 @@ function setUpEle(select){
   select.custom.append(select.label)
   select.label.textContent=select.selectedEL
   select.label.tabIndex=0
-  select.label.addEventListener('click',   ()=>{
+  select.label.addEventListener('click', ()=>{
     select.optionsbox.classList.toggle('show')
   }
 )
 
   select.optionsbox.classList.add('custom-select-optionsbox')
   select.custom.append(select.optionsbox)
+  select.optionsbox.addEventListener('click',(e)=>{
+    e.target.classList.add('selected' )
+  })
 
- select.optionsValue.forEach(el => {
+ select.optionsValue.forEach(obj => {
  const cosOption=document.createElement('li')
  cosOption.classList.add('custom-select-option')
- cosOption.textContent=el.label
- cosOption.dataset.value=el.value 
- cosOption.classList.toggle('selected' ,el.selected)
-
+ cosOption.textContent=obj.label
+ cosOption.dataset.value=obj.value 
+ cosOption.classList.toggle('selected' ,obj.selected)
   select.optionsbox.append(cosOption) 
+  cosOption.addEventListener
 })
 }
 function getFormattedOptions(optionsList){
