@@ -8,12 +8,14 @@ export default class Select{
  element.style.display='none'
   setUpEle(this)
   element.after(this.custom)
+
   
 }
 get selectedEL(){
   return  this.optionsValue.find(obj=> obj.selected).label
 }
 }
+
 
 function setUpEle(select){
   select.custom.classList.add('custom-select-container')
@@ -27,21 +29,31 @@ function setUpEle(select){
   }
 )
 
+const cosLIST=select.optionsValue.map(obj => {
+  const cosOption=document.createElement('li')
+  cosOption.classList.add('custom-select-option')
+  cosOption.textContent=obj.label
+  cosOption.dataset.value=obj.value 
+ /*  cosOption.classList.toggle('selected' ,obj.selected) */
+   select.optionsbox.append(cosOption) 
+   return cosOption
+ }
+)
+
+
   select.optionsbox.classList.add('custom-select-optionsbox')
   select.custom.append(select.optionsbox)
-  select.optionsbox.addEventListener('click',(e)=>{
-    e.target.classList.add('selected' )
-  })
+  log(cosLIST)
+ select.optionsbox.addEventListener('click',function addClicked(e){
+  if (cosLIST.some((el)=>el.classList.contains('selected'))){
+    const old=cosLIST.find((el)=>el.classList.contains('selected'))
+    old.classList.remove('selected')}
+    e.target.classList.add('selected')
+    select.label.textContent=e.target.textContent
+    select.optionsbox.classList.remove('show')
+ }
+)
 
- select.optionsValue.forEach(obj => {
- const cosOption=document.createElement('li')
- cosOption.classList.add('custom-select-option')
- cosOption.textContent=obj.label
- cosOption.dataset.value=obj.value 
- cosOption.classList.toggle('selected' ,obj.selected)
-  select.optionsbox.append(cosOption) 
-  cosOption.addEventListener
-})
 }
 function getFormattedOptions(optionsList){
  return [...optionsList].map(el=>{
