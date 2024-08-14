@@ -8,25 +8,30 @@ export default class Select{
  element.style.display='none'
   setUpEle(this)
   element.after(this.custom)
-
+  this.cosLIST
   
 }
 get selectedEL(){
   return  this.optionsValue.find(obj=> obj.selected).label
 }
  addClicked(e){
-  if (cosLIST.some((el)=>el.classList.contains('selected')))
+  if ( this.cosLIST.some((el)=>el.classList.contains('selected')))
     {
-    const old=cosLIST.find((el)=>el.classList.contains('selected'))
+    const old= this.cosLIST.find((el)=>el.classList.contains('selected'))
     old.classList.remove('selected')
   }
     e.target.classList.add('selected')
     this.label.textContent=e.target.textContent
     this.optionsbox.classList.remove('show')
   }
+
+  keySelected(e){
+    log('sssssssss ')
+log(e.code)
+  }
 }
 
-let cosLIST=[]
+
 
 function setUpEle(select){
   select.custom.classList.add('custom-select-container')
@@ -39,7 +44,11 @@ function setUpEle(select){
     select.optionsbox.classList.toggle('show')
   }
 )
- cosLIST=select.optionsValue.map(obj => {
+select.label.addEventListener('keydown',(e)=>{
+  log('sssssssss ')
+  select.keySelected(e)})
+
+ select.cosLIST=select.optionsValue.map(obj => {
   const cosOption=document.createElement('li')
   cosOption.classList.add('custom-select-option')
   cosOption.textContent=obj.label
@@ -51,9 +60,8 @@ function setUpEle(select){
 )
   select.optionsbox.classList.add('custom-select-optionsbox')
   select.custom.append(select.optionsbox)
-  log(cosLIST)
  select.optionsbox.addEventListener('click',(e)=>{select.addClicked(e)})
- select.optionsbox.addEventListener('keydown',(e)=>{select.keySelected(e)})
+
 
 }
 function getFormattedOptions(optionsList){
