@@ -9,7 +9,8 @@ export default class Select{
   setUpEle(this)
   element.after(this.custom)
   this.cosLIST
-  
+  this.i= 0
+
 }
 get selectedEL(){
   return  this.optionsValue.find(obj=> obj.selected).label
@@ -18,17 +19,49 @@ get selectedEL(){
   if ( this.cosLIST.some((el)=>el.classList.contains('selected')))
     {
     const old= this.cosLIST.find((el)=>el.classList.contains('selected'))
+    
     old.classList.remove('selected')
   }
+
     e.target.classList.add('selected')
+    this.i=this.cosLIST.findIndex((el)=>el.classList.contains('selected'))
+    log(this.i)
     this.label.textContent=e.target.textContent
     this.optionsbox.classList.remove('show')
   }
-
   keySelected(e){
-    log('sssssssss ')
-log(e.code)
+    log(e.code)
+    const scrollAmount = 13;
+   switch (e.code){
+    case 'Enter':this.optionsbox.classList.toggle('show')
+    break
+   case 'ArrowDown': {
+    log(e.code)
+    this.optionsbox.scrollTop += scrollAmount;
+      if (this.cosLIST[this.i-1]){
+        this.cosLIST[this.i-1].classList.remove('selected');}
+     
+      this.cosLIST[this.i].classList.add('selected');
+      this.i+1>=this.cosLIST.length?this.i=0:this.i++
+      log(this.i)
+
+    }
+    break
+    case 'ArrowUp':{
+      this.optionsbox.scrollTop -= scrollAmount;
+    if (this.cosLIST[this.i-1]) {
+      this.cosLIST[this.i].classList.remove('selected');
+      this.i--
+        this.cosLIST[this.i].classList.add('selected')}
+      else{
+        this.cosLIST[0].classList.add('selected');
+      }
+   
+      
   }
+  break
+  }
+}
 }
 
 
@@ -45,7 +78,6 @@ function setUpEle(select){
   }
 )
 select.label.addEventListener('keydown',(e)=>{
-  log('sssssssss ')
   select.keySelected(e)})
 
  select.cosLIST=select.optionsValue.map(obj => {

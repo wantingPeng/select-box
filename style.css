@@ -43,7 +43,7 @@ overflow-y: auto;
 display: none; 
  position: absolute; 
  width: 100%;
-
+ scroll-behavior: smooth;
 }
 .custom-select-optionsbox.show{
 display: block;
