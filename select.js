@@ -63,19 +63,25 @@ get selectedEL(){
         this.cosLIST[0].classList.add('selected');
       }
       this.cosLIST[this.i].scrollIntoView({ block: 'nearest', behavior: 'smooth' })
-
       
   }
   break
   default:{
-    log('sssssssss')
 
-    e.key=='Backspace'?this.searchsStream +='':this.searchsStream +=e.key
-    this.searchsStream
+    e.key=='Backspace'?this.searchsStream=this.searchsStream.slice(0,-1):this.searchsStream +=e.key
+
     log(this.searchsStream)
+    let flag=this.optionsValue.some(obj=>obj.label.toLowerCase().startsWith(this.searchsStream))
+    if (flag){
+      log('find')
 
-/*     this.optionsValue.forEach(obj=>obj.label.startsWith(e.code))
- */  }
+      break
+    }else{
+      log('no')
+  /*   ValueOfsearched=flag.value
+    this.cosLIST.find(el=>el.dataset.value==ValueOfsearched).classList.add('selected'); */
+  }
+  }
   break
   }
   
