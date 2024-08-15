@@ -68,18 +68,21 @@ get selectedEL(){
   break
   default:{
 
-    e.key=='Backspace'?this.searchsStream=this.searchsStream.slice(0,-1):this.searchsStream +=e.key
+    if (e.key=='Backspace'){this.searchsStream=this.searchsStream.slice(0,-1);
+/*       this.cosLIST.forEach(el=>el.classList.remove('selected'))
+ */
+    }else this.searchsStream +=e.key
 
     log(this.searchsStream)
     let flag=this.optionsValue.some(obj=>obj.label.toLowerCase().startsWith(this.searchsStream))
     if (flag){
       log('find')
-
-      break
+      const ValueOfsearched=this.optionsValue.find(obj=>obj.label.toLowerCase().startsWith(this.searchsStream))
+      this.cosLIST.forEach(el=>el.classList.remove('selected'))
+      this.cosLIST.find(el=>el.dataset.value==ValueOfsearched.value).classList.add('selected'); 
     }else{
       log('no')
-  /*   ValueOfsearched=flag.value
-    this.cosLIST.find(el=>el.dataset.value==ValueOfsearched).classList.add('selected'); */
+    
   }
   }
   break
