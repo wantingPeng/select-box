@@ -28,6 +28,8 @@ position: relative;
   justify-content: space-between;
   padding: 0.3rem;
   font-weight: bold;
+  width: 100%;
+
 /*   user-select: none;
  */}
 #custom-select-label:focus{
@@ -40,7 +42,6 @@ border: 2px solid black;
 margin: 0;
 padding: 0; 
 border-top: none;
-max-height: 200px;
 overflow-y: auto;
 display: none; 
  position: absolute; 

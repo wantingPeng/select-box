@@ -15,15 +15,17 @@ export default class Select{
 get selectedEL(){
   return  this.optionsValue.find(obj=> obj.selected).label
 }
+
  addClicked(e){
   if ( this.cosLIST.some((el)=>el.classList.contains('selected')))
     {
     const old= this.cosLIST.find((el)=>el.classList.contains('selected'))
-    
-    old.classList.remove('selected')
+    removeSelect(old)
+/*     old.classList.remove('selected') */
   }
 
-    e.target.classList.add('selected')
+   /*  e.target.classList.add('selected') */
+    addSelect(e.target)
     this.label.value=this.cosLIST[this.i].textContent
 
     this.i=this.cosLIST.findIndex((el)=>el.classList.contains('selected'))
@@ -40,10 +42,13 @@ get selectedEL(){
 
       if (this.cosLIST[this.i-1])
         {
-        this.cosLIST[this.i-1].classList.remove('selected');
+        /* this.cosLIST[this.i-1].classList.remove('selected'); */
+        removeSelect(this.cosLIST[this.i-1])
+
       }
-        this.cosLIST[this.i].classList.add('selected');
-        this.cosLIST[this.i].scrollIntoView({ block: 'nearest', behavior: 'smooth' })
+/*         this.cosLIST[this.i].classList.add('selected');
+ */       addSelect(this.cosLIST[this.i])
+ this.cosLIST[this.i].scrollIntoView({ block: 'nearest', behavior: 'smooth' })
       this.label.value=this.cosLIST[this.i].textContent
       this.i+1>=this.cosLIST.length?this.i=0:this.i++
       log(this.i)
@@ -52,44 +57,48 @@ get selectedEL(){
     break
     case 'ArrowUp':{
     if (this.cosLIST[this.i-1]) {
-      this.cosLIST[this.i].classList.remove('selected');
+     /*  this.cosLIST[this.i].classList.remove('selected'); */
+     removeSelect(this.cosLIST[this.i-1])
+
       this.i--
-        this.cosLIST[this.i].classList.add('selected')
+      /*   this.cosLIST[this.i].classList.add('selected') */
+        addSelect( this.cosLIST[this.i])
         this.label.value=this.cosLIST[this.i].textContent
 
       }
         
       else{
         this.cosLIST[0].classList.add('selected');
+        addSelect( this.cosLIST[0])
       }
       this.cosLIST[this.i].scrollIntoView({ block: 'nearest', behavior: 'smooth' })
       
   }
   break
   default:{
+    this.optionsbox.classList.add('show')
 
-    if (e.key=='Backspace'){this.searchsStream=this.searchsStream.slice(0,-1);
-/*       this.cosLIST.forEach(el=>el.classList.remove('selected'))
- */
-    }else this.searchsStream +=e.key
+    e.key=='Backspace'?this.searchsStream=this.searchsStream.slice(0,-1):this.searchsStream +=e.key
 
     log(this.searchsStream)
-    let flag=this.optionsValue.some(obj=>obj.label.toLowerCase().startsWith(this.searchsStream))
-    if (flag){
-      log('find')
+
       const ValueOfsearched=this.optionsValue.find(obj=>obj.label.toLowerCase().startsWith(this.searchsStream))
-      this.cosLIST.forEach(el=>el.classList.remove('selected'))
+     /*  this.cosLIST.forEach(el=>el.classList.remove('selected')) */
+     this.cosLIST.forEach(el=>removeSelect(el)) 
       this.cosLIST.find(el=>el.dataset.value==ValueOfsearched.value).classList.add('selected'); 
-    }else{
-      log('no')
-    
-  }
+
   }
   break
   }
   
 }
 
+}
+function removeSelect(el){
+  el.classList.remove('selected')
+}
+function addSelect(el){
+  el.classList.add('selected')
 }
 
 function setUpEle(select){
