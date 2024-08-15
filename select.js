@@ -24,6 +24,8 @@ get selectedEL(){
   }
 
     e.target.classList.add('selected')
+    this.label.textContent=this.cosLIST[this.i].textContent
+
     this.i=this.cosLIST.findIndex((el)=>el.classList.contains('selected'))
     log(this.i)
     this.label.textContent=e.target.textContent
@@ -37,22 +39,28 @@ get selectedEL(){
     break
    case 'ArrowDown': {
     log(e.code)
-    this.optionsbox.scrollTop += scrollAmount;
+  /*   this.optionsbox.scrollTop += scrollAmount; */
+
       if (this.cosLIST[this.i-1]){
         this.cosLIST[this.i-1].classList.remove('selected');}
-     
-      this.cosLIST[this.i].classList.add('selected');
+        this.cosLIST[this.i].classList.add('selected');
+        this.cosLIST[this.i].scrollIntoView({ block: 'nearest', behavior: 'smooth' })
+      this.label.textContent=this.cosLIST[this.i].textContent
       this.i+1>=this.cosLIST.length?this.i=0:this.i++
       log(this.i)
 
     }
     break
     case 'ArrowUp':{
-      this.optionsbox.scrollTop -= scrollAmount;
+     /*  this.optionsbox.scrollTop -= scrollAmount; */
+     this.optionsbox.scrollIntoView({ block: 'nearest', behavior: 'smooth' })
     if (this.cosLIST[this.i-1]) {
       this.cosLIST[this.i].classList.remove('selected');
       this.i--
-        this.cosLIST[this.i].classList.add('selected')}
+        this.cosLIST[this.i].classList.add('selected')
+        this.cosLIST[this.i].scrollIntoView({ block: 'nearst', behavior: 'smooth' })
+      }
+        
       else{
         this.cosLIST[0].classList.add('selected');
       }
@@ -63,8 +71,6 @@ get selectedEL(){
   }
 }
 }
-
-
 
 function setUpEle(select){
   select.custom.classList.add('custom-select-container')

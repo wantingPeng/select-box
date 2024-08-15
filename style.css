@@ -28,13 +28,15 @@ position: relative;
   justify-content: space-between;
   padding: 0.3rem;
   font-weight: bold;
-  user-select: none;
-}
+/*   user-select: none;
+ */}
 .custom-select-label:focus{
   outline:auto;
 }
 .custom-select-optionsbox{
 /*   border: 2px solid red; */
+border: 2px solid black;
+
 margin: 0;
 padding: 0; 
 border-top: none;
